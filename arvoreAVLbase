@@ -1,0 +1,67 @@
+
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct arvore{
+    int info;
+    int fatBAL;
+    struct arvore* esq;
+    struct arvore* dir;
+    
+}Arvore;
+
+
+void rotacaoRR(Arvore **l){
+    int fat = (*l)->fatBAL;
+    Arvore* temp = (*l);
+    (*l) = temp ->esq;
+    temp->esq = (*l)->dir;
+    (*l)->dir=temp;
+    if(fat == -2){
+       if((*l)->fatBAL == -1){
+           (*l)->fatBAL = 0;
+           temp->fatBAL = 0 ;
+       }else{
+           (*l)->fatBAL = 1;
+           temp->fatBAL = -1;
+       }
+       }else{
+        if((*l)->fatBAL == 0){
+            (*l)->fatBAL = 1;
+            temp->fatBAL = 0; 
+        }else{
+            (*l)->fatBAL = 1;
+            temp->fatBAL = 1;
+        }
+       }
+    }
+void rotacaoLL(Arvore **l){
+    int fat = (*l)->fatBAL;
+    Arvore* temp = (*l);
+    (*l) = temp ->dir;
+    temp->dir = (*l)->esq;
+    (*l)->esq=temp;
+    if(fat == 2){
+       if((*l)->fatBAL == 1){
+           (*l)->fatBAL = 0;
+           temp->fatBAL = 0 ;
+       }else{
+           (*l)->fatBAL = -1;
+           temp->fatBAL = 1;
+       }
+       }else{
+        if((*l)->fatBAL == 0){
+            (*l)->fatBAL = 1;
+            temp->fatBAL = 0; 
+        }else{
+            (*l)->fatBAL = -1;
+            temp->fatBAL = -1;
+        }
+       }
+    }
+
+int main(int argc, char** argv) {
+
+    return (EXIT_SUCCESS);
+}
+
